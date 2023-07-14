@@ -1,5 +1,11 @@
 This has changed.
 
+To build multiple platform do:
+docker buildx create --use
+
+Then build with
+docker buildx bake --set mongo-seed.platform=linux/amd64,linux/arm64 --set api.platform=linux/amd64,linux/arm64 --set frontend.platform=linux/amd64,linux/arm64 --push
+
 # Application
 
 ## Intro
