@@ -1,9 +1,9 @@
-name: Node.js CI
+name: deploy on push to main
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -47,7 +47,6 @@ jobs:
         
   infrastructure:
     needs: test
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -86,7 +85,6 @@ jobs:
    
   build:
     needs: infrastructure
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
