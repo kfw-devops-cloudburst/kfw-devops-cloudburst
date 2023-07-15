@@ -71,6 +71,7 @@ jobs:
         uses: docker/bake-action@v3
         with:
           push: true
+          files: docker-compose.yml
           workdir: ./application/
           set: |
              db-seed.platform=linux/amd64,linux/arm64
