@@ -52,11 +52,6 @@ jobs:
         run: npm audit 
       
       - name: Deploy
-        env:
-          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
-          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
-          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
-          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
         run: nmp run deploy --if-present
         
   infrastructure:
@@ -72,10 +67,25 @@ jobs:
         run: terraform init
       - name: Terraform Validate
         run: terraform validate
+        env:
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
       - name: Terraform Plan
         run: terraform plan
+        env:
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        env:
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
    
   build:
     needs: infrastructure
