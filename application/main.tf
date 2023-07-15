@@ -34,7 +34,7 @@ resource "azurerm_container_registry" "cloudburst-acr" {
   location = "germanywestcentral"
 }
 
-module "resource_group" {
-  source   = "./resource_groups"
-  resource_groups = var.spec.resource_groups
-}
+#module "resource_group" {
+#  source   = "./resource_groups"
+#  resource_groups = var.spec.resource_groups
+#}
