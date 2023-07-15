@@ -54,7 +54,8 @@ jobs:
       - name: Deploy
         run: nmp run deploy --if-present
         
-  deploy:
+  infrastructure:
+    needs: test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -72,7 +73,7 @@ jobs:
         run: terraform apply -auto-approve
    
   build:
-    needs: test
+    needs: infrastructure
     runs-on: ubuntu-latest
     defaults:
       run:
