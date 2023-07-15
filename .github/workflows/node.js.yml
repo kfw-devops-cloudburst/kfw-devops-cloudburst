@@ -74,6 +74,6 @@ jobs:
           files: docker-compose.yml
           workdir: ./application/
           set: |
-             db-seed.platform=linux/amd64,linux/arm64
+             mongo-seed.platform=linux/amd64,linux/arm64
              frontend.platform=linux/amd64,linux/arm64
              api.platform=linux/amd64,linux/arm64
