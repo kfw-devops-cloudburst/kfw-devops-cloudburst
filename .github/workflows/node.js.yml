@@ -34,14 +34,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-          npm i eslint
 
       - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
-          prettier: true
-          continue_on_error: true
+        run: npm run lint
+
 
       - name: Build
         run: npm run build --if-present
