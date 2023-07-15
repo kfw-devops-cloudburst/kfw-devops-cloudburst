@@ -16,7 +16,8 @@
   },
   "devDependencies": {
     "eslint": "^8.45.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "prettier": "3.0.0"
   },
   "scripts": {
     "test": "echo \"No tests specified\" && exit 0",
