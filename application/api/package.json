@@ -15,6 +15,7 @@
     "mongoose": "^5.9.27"
   },
   "devDependencies": {
+    "eslint": "^8.45.0",
     "nodemon": "^2.0.4"
   },
   "scripts": {
