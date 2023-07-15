@@ -22,7 +22,14 @@ provider "azurerm" {
   features {}
 }
 
-data "azurerm_container_registry" "acr" {
-  name = "acrmanual"
-  resource_group_name = "cloudburst-rg-manual"
+resource "azurerm_resource_group" "cloudburst-rg" {
+  name = "cloudburst-rg"
+  location = "germanywestcentral"
+}
+
+resource "azurerm_container_registry" "cloudburst-acr" {
+  name = "cloudburstacr"
+  sku = "Standard"
+  resource_group_name = "cloudburst-rg"
+  location = "germanywestcentral"
 }
