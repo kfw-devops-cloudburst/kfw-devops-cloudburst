@@ -56,6 +56,9 @@ jobs:
         
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./application/ # Set the default working directory
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
@@ -95,7 +98,4 @@ jobs:
           set: |
              mongo-seed.platform=linux/amd64,linux/arm64
              frontend.platform=linux/amd64,linux/arm64
-             api.platform=linux/amd64,linux/arm64         
-   deploy:
- - uses:
- 
+             api.platform=linux/amd64,linux/arm64
