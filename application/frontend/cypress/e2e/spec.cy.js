@@ -44,7 +44,7 @@ describe('spec.cy.js', () => {
     cy.get('button:contains("Add")').click();
   
 
-    // cy.visit('/')
+    cy.visit('/')
     cy.contains(BOOK_TITLE).should('be.visible')
   })
   
@@ -88,16 +88,21 @@ describe('spec.cy.js', () => {
 
     // Find previously created BOOK_TITLE, and count its occurrences
     cy.get('body').find(`th:contains(${BOOK_TITLE})`).its('length').then((oldCnt) => {
-      oldCount = oldCnt});
+      console.log("Previous: ", oldCnt);
+      oldCount = oldCnt
+    });
 
     // Find previously created BOOK_TITLE, and look for the parent button with "delete"
-    cy.contains(BOOK_TITLE).parent().find(`[aria-label="Delete"]`).click();
+    cy.contains(BOOK_TITLE).parent().find(`[aria-label="Delete"]`).click().wait(200);
 
     // Confirm deletion
-    cy.get('button:contains("Delete")').click({force: true}).wait(200);
+    cy.get('button:contains("Delete")').scrollIntoView().click().wait(200);
+
+    cy.visit('/')
 
     // Ensure that the count of the book has decreased by one
     cy.get('body').find(`th:contains(${BOOK_TITLE})`).its('length').then((newCount) => {
+      console.log("New Count: ", newCount);
       expect(oldCount).to.eq(newCount + 1);
     })
   })
