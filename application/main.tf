@@ -1,3 +1,13 @@
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "cloudburst-rg-manual"
+    storage_account_name = "cloudburstterraformstate"
+    container_name       = "terraformstate"
+    key                  = "state"
+  }
+}
+
+
 variable "azure_client_secret" {
   type = string
 }

@@ -1,13 +1,9 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code, and run tests across different versions of node
-# For more information, see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: deploy on push to main
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   test:
@@ -47,13 +43,48 @@ jobs:
         
       - name: Audit
         continue-on-error: true
-        run: npm audit 
-      
-      - name: HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.3
-  
-  build:
+        run: npm audit
+        
+  infrastructure:
     needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./application/ # Set the default working directory
+    env:
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Validate
+        run: terraform validate
+        env:
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
+   
+  build:
+    needs: infrastructure
     runs-on: ubuntu-latest
     defaults:
       run:
