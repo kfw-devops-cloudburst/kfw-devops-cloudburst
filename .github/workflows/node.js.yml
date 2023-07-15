@@ -51,9 +51,12 @@ jobs:
         continue-on-error: true
         run: npm audit 
       
-      - name: HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.3
-  
+      - name: Deploy
+        run: nmp run deploy --if-present
+        
+  deploy:
+   - uses: hashicorp/setup-terraform@v2.0.3
+   
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -81,4 +84,7 @@ jobs:
           set: |
              mongo-seed.platform=linux/amd64,linux/arm64
              frontend.platform=linux/amd64,linux/arm64
-             api.platform=linux/amd64,linux/arm64
+             api.platform=linux/amd64,linux/arm64         
+   deploy:
+ - uses:
+ 
