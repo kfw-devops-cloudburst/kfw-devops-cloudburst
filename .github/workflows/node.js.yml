@@ -1,10 +1,9 @@
 name: Node.js CI
 
 on:
-  push:
-    #branches: [ "main" ]
   pull_request:
-    #branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   test:
@@ -49,7 +48,8 @@ jobs:
         run: npm audit
         
   infrastructure:
-    #needs: test
+    needs: test
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -88,6 +88,7 @@ jobs:
    
   build:
     needs: infrastructure
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
