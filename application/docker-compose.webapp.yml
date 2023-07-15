@@ -7,7 +7,7 @@ services:
     build: 
       context: ./db-seed
       args:
-        HOST: mongodb
+        HOST: cloudburst-mongodb.mongo.cosmos.azure.com
     image: cloudburstacr.azurecr.io/mongo-seed
     depends_on:
       - mongodb
@@ -21,7 +21,7 @@ services:
     environment:
       PORT: 4000
       # MONGO_URI: ${MONGO_URI}
-      MONGO_URI: mongodb://mongodb:27017/dobook
+      MONGO_URI: mongodb://cloudburst-mongodb.mongo.cosmos.azure.com:10255/dobook
 
   frontend:
     build:
