@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+defaults:
+  run:
+    working-directory: ./application/${{ matrix.project }} # Set the default working directory
+
 jobs:
   test:
     runs-on: ubuntu-latest
