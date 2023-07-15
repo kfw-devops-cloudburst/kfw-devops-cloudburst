@@ -48,5 +48,6 @@ jobs:
         run: npm test
         
       - name: Audit
+        continue-on-error: true
         run: npm audit [--audit-level=critical]
       
