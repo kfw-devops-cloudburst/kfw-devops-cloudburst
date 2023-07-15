@@ -33,7 +33,7 @@ class Overview extends Component {
 class App extends Component {
 
   componentDidMount(){
-    document.title = process.env.REACT_APP_TITLE ? "Bücher Ausleihe " + process.env.REACT_APP_TITLE : "Bücher Ausleihe"
+    document.title = process.env.REACT_APP_TITLE ? "Bücher Ausleihe " + process.env.REACT_APP_TITLE : "Bücher Ausleihe";
   }
 
   render() {
