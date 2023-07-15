@@ -1,11 +1,14 @@
-This has changed.
-
 # Application
 
 ## Intro
 
 Es handelt sich um eine (ältere) "three-tier" Applikation mit frontend, api, database.
 Für diesen Hackathon dient die Applikation nur als Mittel zum Zweck, und die Entwicklung an der Applikation steht hier **nicht** im Fokus. Aus DevOps Sicht ist es trotzdem relevant zu wissen, wie die Architektur der Applikation aussieht und welche Technologien eingesetzt werden, da ihr bei dem Deployment und den Operationstätigkeiten unterstützen sollt.
+
+
+## Documentation
+
+For all documentation, please refer to the GitHub Wiki.
 
 ## Architektur und Verzeichnis Struktur
 
@@ -28,8 +31,4 @@ Die Applikation besteht im wesentlichen aus drei Seiten
 - `/admin` - Admin Seite um Bücher zu verwalten
 
 <img src="./application/docs/dobib.app.png">
-
-# Documentation
-
-> Ihr könnt hier eure Dokumentation zu den Herausforderungen hinzufügen oder euch im Team auf eine eigene Dokumentations Struktur einigen
 
