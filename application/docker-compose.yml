@@ -34,3 +34,8 @@ services:
       - api
     ports:
       - 80:80
+  
+  real-world-example-app:
+    image: cloudburstacr.azurecr.io/real-world-example-app
+    build:
+      context: ./real-world-example-app
