@@ -9,10 +9,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-defaults:
-  run:
-    working-directory: ./application/${{ matrix.project }} # Set the default working directory
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,6 +17,10 @@ jobs:
       matrix:
         node-version: [14.x]
         project: [frontend, api]
+
+    defaults:
+      run:
+        working-directory: ./application/${{ matrix.project }} # Set the default working directory
 
     steps:
       - uses: actions/checkout@v3
