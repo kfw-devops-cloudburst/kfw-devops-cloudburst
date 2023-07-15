@@ -7,17 +7,16 @@ services:
       - 27017:27017
 
   mongo-seed: #this is used to populate the DB, see dockerfile for import command
-    image: acrmanual.azurecr.io/mongo-seed
-    build: ./db-seed
-    # image: yourregistry.azurecr.io/bib/mongo-seed
+    image: cloudburstacr.azurecr.io/mongo-seed
+    build:
+      context: ./db-seed
     depends_on:
       - mongodb
 
   api:
-    image: acrmanual.azurecr.io/api
+    image: cloudburstacr.azurecr.io/api
     build:
       context: ./api
-    # image: yourregistry.azurecr.io/bib/api
     environment:
       PORT: 4000
       MONGO_URI: mongodb://mongodb:27017/dobook
@@ -25,10 +24,9 @@ services:
       - mongodb
 
   frontend:
-    image: acrmanual.azurecr.io/frontend
+    image: cloudburstacr.azurecr.io/frontend
     build:
       context: ./frontend
-    # image: yourregistry.azurecr.io/bib/frontend
     environment:
       API_HOST: api
       API_PORT: 4000
