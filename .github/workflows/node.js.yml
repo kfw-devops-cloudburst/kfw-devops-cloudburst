@@ -1,0 +1,80 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code, and run tests across different versions of node
+# For more information, see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        project: [frontend, api]
+
+    defaults:
+      run:
+        working-directory: ./application/${{ matrix.project }} # Set the default working directory
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: ./application/${{ matrix.project }}/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linters
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Test
+        run: npm test
+        
+      - name: Audit
+        continue-on-error: true
+        run: npm audit 
+      
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./application/ # set default working directory
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to ACR
+        uses: docker/login-action@v2
+        with:
+          registry: cloudburstacr.azurecr.io  # replace with your registry URL
+          username: ${{ secrets.ACR_USERNAME }} # replace with the secret for your username
+          password: ${{ secrets.ACR_TOKEN }} # replace with the secret for your token
+      - name: build and push
+        uses: docker/bake-action@v3
+        with:
+          push: true
+          files: docker-compose.yml
+          workdir: ./application/
+          set: |
+             mongo-seed.platform=linux/amd64,linux/arm64
+             frontend.platform=linux/amd64,linux/arm64
+             api.platform=linux/amd64,linux/arm64
