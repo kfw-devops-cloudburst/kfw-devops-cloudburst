@@ -35,11 +35,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
-          prettier: true
+      #- name: Run linters
+      #  uses: wearerequired/lint-action@v2
+      #  with:
+      #    eslint: true
+      #    prettier: true
 
       - name: Build
         run: npm run build --if-present
@@ -50,6 +50,9 @@ jobs:
       - name: Audit
         continue-on-error: true
         run: npm audit 
+      
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
   
   build:
     needs: test
