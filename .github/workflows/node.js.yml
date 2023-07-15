@@ -49,5 +49,5 @@ jobs:
         
       - name: Audit
         continue-on-error: true
-        run: npm audit [--audit-level=critical]
+        run: npm audit 
       
