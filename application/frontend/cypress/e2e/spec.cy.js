@@ -1,18 +1,23 @@
 describe('spec.cy.js', () => { 
   const BOOK_TITLE = "Test Book Title"
   
-  const resetServiceWorker = async () => {
+  beforeEach(() => {
+    cy.log(cy.url());
+
+    /*
+    // Only required for "npx cypress open"
     if (!window.navigator || !navigator.serviceWorker) {
       return null;
     }
-
-    const registrations = await navigator.serviceWorker.getRegistrations();
-    return Promise.all(registrations.map((registration) => {
-      return registration.unregister();
-    }));
-  }
-
-  beforeEach(resetServiceWorker);
+  
+    return navigator.serviceWorker.getRegistrations()
+      .then((registrations) => {
+        return Promise.all(registrations.map((registration) => {
+          return registration.unregister();
+        }));
+      });
+      */
+  });
 
   // a. Validate that the page is accessible
   it('successfully loads', () => {
