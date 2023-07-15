@@ -4,10 +4,11 @@ services:
     image: cloudburstacr.azurecr.io/mongo
 
   mongo-seed: #this is used to populate the DB, see dockerfile for import command
-    build: 
+    build:
       context: ./db-seed
       args:
         HOST: cloudburst-mongodb.mongo.cosmos.azure.com
+        PORT: 10255
     image: cloudburstacr.azurecr.io/mongo-seed
     depends_on:
       - mongodb
