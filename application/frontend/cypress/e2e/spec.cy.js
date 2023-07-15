@@ -94,7 +94,7 @@ describe('spec.cy.js', () => {
     cy.contains(BOOK_TITLE).parent().find(`[aria-label="Delete"]`).click();
 
     // Confirm deletion
-    cy.get('button:contains("Delete")').click().wait(200);
+    cy.get('button:contains("Delete")').click({force: true}).wait(200);
 
     // Ensure that the count of the book has decreased by one
     cy.get('body').find(`th:contains(${BOOK_TITLE})`).its('length').then((newCount) => {
