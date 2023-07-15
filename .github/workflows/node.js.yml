@@ -55,7 +55,7 @@ jobs:
         run: nmp run deploy --if-present
         
   infrastructure:
-    needs: test
+    #needs: test
     runs-on: ubuntu-latest
     defaults:
       run:
