@@ -49,10 +49,7 @@ jobs:
         
       - name: Audit
         continue-on-error: true
-        run: npm audit 
-      
-      - name: Deploy
-        run: nmp run deploy --if-present
+        run: npm audit
         
   infrastructure:
     #needs: test
