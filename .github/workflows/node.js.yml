@@ -51,32 +51,7 @@ jobs:
         continue-on-error: true
         run: npm audit 
   
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./application/ # Set the default working directory
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to ACR
-        uses: docker/login-action@v2
-        with:
-          registry: cloudburstacr.azurecr.io  # replace with your registry URL
-          username: ${{ secrets.ACR_USERNAME }} # replace with the secret name for your DockerHub username
-          password: ${{ secrets.ACR_TOKEN }} # replace with the secret name for your DockerHub token
-      - name: build and push
-        uses: docker/bake-action@v3
-        with:
-          push: true
-          workdir: ./application/
-          set: |
-             db-seed.platform=linux/amd64,linux/arm64
-             frontend.platform=linux/amd64,linux/arm64
-             api.platform=linux/amd64,linux/arm64
-             
+              
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
              
