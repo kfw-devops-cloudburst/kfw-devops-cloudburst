@@ -7,14 +7,14 @@ services:
       - 27017:27017
 
   mongo-seed: #this is used to populate the DB, see dockerfile for import command
-    image: cloudburstacr.azurecr.io.azurecr.io/mongo-seed
+    image: cloudburstacr.azurecr.io/mongo-seed
     build: ./db-seed
     # image: yourregistry.azurecr.io/bib/mongo-seed
     depends_on:
       - mongodb
 
   api:
-    image: cloudburstacr.azurecr.io.azurecr.io/api
+    image: cloudburstacr.azurecr.io/api
     build:
       context: ./api
     # image: yourregistry.azurecr.io/bib/api
@@ -25,7 +25,7 @@ services:
       - mongodb
 
   frontend:
-    image: cloudburstacr.azurecr.io.azurecr.io/frontend
+    image: cloudburstacr.azurecr.io/frontend
     build:
       context: ./frontend
     # image: yourregistry.azurecr.io/bib/frontend
