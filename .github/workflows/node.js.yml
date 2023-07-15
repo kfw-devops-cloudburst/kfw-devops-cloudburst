@@ -57,7 +57,7 @@ jobs:
     defaults:
       run:
         working-directory: ./application/ # Set the default working directory
-    environment:
+    env:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
