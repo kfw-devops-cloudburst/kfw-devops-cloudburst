@@ -1,12 +1,27 @@
+variable "azure_client_secret" {
+  type = string
+}
+
+variable "azure_tenant_id" {
+  type = string
+}
+
+variable "azure_client_id" {
+  type = string
+}
+
+variable "azure_subscription_id" {
+  type = string
+}
+
 provider "azurerm" {
-  features {}
+  subscription_id = var.azure_subscription_id
+  client_id = var.azure_client_id
+  client_secret = var.azure_client_secret
+  tenant_id = var.azure_tenant_id
 }
 
 data "azurerm_container_registry" "acr" {
-  name                = "acrmanual"
+  name = "acrmanual"
   resource_group_name = "cloudburst-rg-manual"
-}
-
-output "acr_login_server" {
-  value = data.azurerm_container_registry.acr.login_server
 }
