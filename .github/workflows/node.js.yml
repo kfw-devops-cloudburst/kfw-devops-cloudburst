@@ -53,10 +53,10 @@ jobs:
       
       - name: Deploy
         env:
-          TF_VAR_1: ${{secrets.AZURE_CLIENT_ID}}
-          TF_VAR_2: ${{secrets.AZURE_CLIENT_SECRET}}
-          TF_VAR_3: ${{secrets.AZURE_SUBSCRIPTION_ID}}
-          TF_VAR_4: ${{secrets.AZURE_TENANT_ID}}
+          TF_VAR_azure_client_id: ${{secrets.AZURE_CLIENT_ID}}
+          TF_VAR_azure_client_secret: ${{secrets.AZURE_CLIENT_SECRET}}
+          TF_VAR_azure_subscription_id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          TF_VAR_azure_tenant_id: ${{secrets.AZURE_TENANT_ID}}
         run: nmp run deploy --if-present
         
   infrastructure:
