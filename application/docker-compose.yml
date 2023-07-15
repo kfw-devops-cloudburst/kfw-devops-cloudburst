@@ -8,8 +8,8 @@ services:
 
   mongo-seed: #this is used to populate the DB, see dockerfile for import command
     image: cloudburstacr.azurecr.io/mongo-seed
-    build: ./db-seed
-    # image: yourregistry.azurecr.io/bib/mongo-seed
+    build:
+      context: ./db-seed
     depends_on:
       - mongodb
 
@@ -17,7 +17,6 @@ services:
     image: cloudburstacr.azurecr.io/api
     build:
       context: ./api
-    # image: yourregistry.azurecr.io/bib/api
     environment:
       PORT: 4000
       MONGO_URI: mongodb://mongodb:27017/dobook
@@ -28,7 +27,6 @@ services:
     image: cloudburstacr.azurecr.io/frontend
     build:
       context: ./frontend
-    # image: yourregistry.azurecr.io/bib/frontend
     environment:
       API_HOST: api
       API_PORT: 4000
