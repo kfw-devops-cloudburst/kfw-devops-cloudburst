@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    #branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    #branches: [ "main" ]
 
 jobs:
   test:
@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./application/ # Set the default working directory
+        working-directory: ./application/ # Set the default working directory 
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
