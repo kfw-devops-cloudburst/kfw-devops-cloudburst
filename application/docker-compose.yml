@@ -1,8 +1,10 @@
 version: "3.8"
 services:
   mongodb: #this is the local db in docker
-    image: yourregistry.azurecr.io/bib/mongo:5
+    image: mongo:5
     restart: always
+    ports:
+      - 27017:27017
 
   mongo-seed: #this is used to populate the DB, see dockerfile for import command
     image: cloudburstacr.azurecr.io/mongo-seed
