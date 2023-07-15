@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: ./${{ matrix.project }}/package-lock.json
+          cache-dependency-path: ./application/${{ matrix.project }}/package-lock.json
       - name: Change directory
         run: cd ./${{ matrix.project }}
       - run: npm ci
