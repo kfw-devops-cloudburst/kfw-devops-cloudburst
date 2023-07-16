@@ -15,7 +15,7 @@ jobs:
     
     services:
       database:
-        image: mongo
+        image: mongo:5
     steps:
       - uses: actions/checkout@v3
       - run : mongodump --uri ${{ secrets.MONGO_URI }} --archive=mongodump.zip
