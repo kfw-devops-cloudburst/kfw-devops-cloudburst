@@ -1,0 +1,25 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint '**/*.{js,ts,jsx,tsx}' --fix && prettier --write '**/*.{js,ts,jsx,tsx,json,css,md}'"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.0"
+  }
+}
