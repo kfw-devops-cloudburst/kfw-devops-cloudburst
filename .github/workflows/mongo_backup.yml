@@ -10,9 +10,12 @@ on:
 jobs:
   mongodump:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/mongo
-      #- run: sudo apt-get install -y mongo
-      - run: mongodump --uri ${{ secrets.MONGO_URI }} --archive=mongodump.zip
+      - uses: gabrielrufino/mongodump-action
+        with:
+          connection-string: ${{ secrets.MONGO_URI }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dump
+          path: ${{ github.workspace }}/dump
      
