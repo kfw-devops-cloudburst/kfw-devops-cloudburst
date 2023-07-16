@@ -1,0 +1,21 @@
+name: MongoDB Backup Schedule Job
+
+on:
+ # schedule:
+ #   - cron: '*/5 * * * *' 
+  push:
+    branches:
+      - challenge-14
+
+jobs:
+  mongodump:
+    name: mongodump
+    
+    runs-on: ubuntu-latest
+    
+    services:
+      database:
+        image: mongo
+    steps:
+      - uses: actions/checkout@v3
+      - run : mongodump --uri ${{ secrets.MONGO_URI }} --archive=mongodump.zip
