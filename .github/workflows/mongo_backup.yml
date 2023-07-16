@@ -9,13 +9,10 @@ on:
 
 jobs:
   mongodump:
-    name: mongodump
-    
     runs-on: ubuntu-latest
-    
-    services:
-      database:
-        image: mongo:5
+
     steps:
-      - uses: actions/checkout@v3
-      - run : mongodump --uri ${{ secrets.MONGO_URI }} --archive=mongodump.zip
+      - uses: actions/mongo
+      #- run: sudo apt-get install -y mongo
+      - run: mongodump --uri ${{ secrets.MONGO_URI }} --archive=mongodump.zip
+     
