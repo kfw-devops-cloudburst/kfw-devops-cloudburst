@@ -1,0 +1,5 @@
+name: 'mongodump'
+
+runs:
+  using: 'docker'
+  image: 'application/mongodump/Dockerfile'

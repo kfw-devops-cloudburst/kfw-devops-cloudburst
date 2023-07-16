@@ -8,14 +8,10 @@ on:
       - challenge-14
 
 jobs:
-  mongodump:
+  hello_world_job:
     runs-on: ubuntu-latest
+    name: mongodump docker job
     steps:
-      - uses: gabrielrufino/mongodump-action
-        with:
-          connection-string: ${{ secrets.MONGO_URI }}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: dump
-          path: ${{ github.workspace }}/dump
-     
+      - name: mongodump command
+        id: hello
+        uses: .github/actions/mongodump.yml
