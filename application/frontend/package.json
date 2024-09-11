@@ -13,8 +13,8 @@
     "react-datasheet": "^1.4.8",
     "react-dom": "^16.13.1",
     "react-jss": "^10.3.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
+    "react-router": "^6.0.0",
+    "react-router-dom": "^6.0.0",
     "react-scripts": "^3.4.1"
   },
   "scripts": {
