@@ -1,4 +1,4 @@
-FROM mongo
+FROM mongo:8.2.4
 
 COPY initialLoad.csv /initialLoad.csv
 # COPY wait-for-it.sh /wait-for-it.sh
